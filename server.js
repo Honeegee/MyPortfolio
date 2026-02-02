@@ -98,8 +98,21 @@ app.post('/api/chat', async (req, res) => {
 // Contact form email endpoint
 const nodemailer = require('nodemailer');
 
-// Create transporter for Gmail
+// Create transporter - use Resend for Render (SMTP blocked on free tier)
 const createTransporter = () => {
+    // Check if using Resend API (recommended for Render)
+    if (process.env.RESEND_API_KEY) {
+        return nodemailer.createTransport({
+            host: 'smtp.resend.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: 'resend',
+                pass: process.env.RESEND_API_KEY
+            }
+        });
+    }
+    // Fallback to Gmail (works on paid Render plans or local dev)
     return nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -131,7 +144,10 @@ app.post('/api/contact', async (req, res) => {
         }
 
         // Check if email credentials are configured
-        if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+        const hasResend = process.env.RESEND_API_KEY;
+        const hasGmail = process.env.EMAIL_USER && process.env.EMAIL_PASSWORD;
+
+        if (!hasResend && !hasGmail) {
             console.error('Email credentials not configured in environment variables');
             return res.status(500).json({
                 error: 'Email service not configured',
@@ -142,8 +158,13 @@ app.post('/api/contact', async (req, res) => {
         const transporter = createTransporter();
         
         // Email content
+        // For Resend: use verified domain email or RESEND_FROM_EMAIL env var
+        const fromEmail = process.env.RESEND_API_KEY
+            ? (process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev')
+            : process.env.EMAIL_USER;
+
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: fromEmail,
             to: process.env.RECEIVER_EMAIL || process.env.EMAIL_USER,
             replyTo: email,
             subject: `Portfolio Contact: ${subject}`,
@@ -182,8 +203,10 @@ app.post('/api/contact', async (req, res) => {
         let errorMessage = 'Failed to send message. Please try again later.';
         if (error.code === 'EAUTH') {
             errorMessage = 'Email authentication failed. Please check email configuration.';
-        } else if (error.code === 'ECONNECTION') {
-            errorMessage = 'Unable to connect to email service. Please check your internet connection.';
+        } else if (error.code === 'ETIMEDOUT' || error.code === 'ECONNECTION') {
+            // SMTP blocked on Render free tier - suggest using Resend
+            console.error('SMTP connection blocked - consider using RESEND_API_KEY');
+            errorMessage = 'Unable to connect to email service. Please try again later.';
         }
 
         res.status(500).json({

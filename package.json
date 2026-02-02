@@ -1,0 +1,20 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Personal Portfolio Website",
+  "scripts": {
+    "build": "tailwindcss -i ./src/styles/input.css -o ./src/styles/main.css --minify",
+    "dev": "tailwindcss -i ./src/styles/input.css -o ./src/styles/main.css --watch",
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "nodemailer": "^7.0.13"
+  }
+}

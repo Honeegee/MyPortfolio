@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey Grace Denolan - Technical Portfolio</title>
+    <link rel="icon" type="image/png" href="/assets/images/Honeygee3d.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles/main.css">
+
+</head>
+<body class="bg-dark text-slate-300 font-sans">
+    
+
+    <!-- Navigation -->
+    <div id="navigation-component" class="z-50"></div>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <!-- Enhanced gradient background - Updated to match global design system -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5"></div>
+        <div class="absolute inset-0 bg-gradient-to-tl from-primary/5 via-transparent to-transparent"></div>
+
+        <!-- Content -->
+        <div class="container mx-auto px-6 py-2 text-center relative z-20">
+            <div class="hero-content max-w-4xl mx-auto">
+                <!-- Profile Image -->
+                <div class="profile-image-container mb-12">
+                    <img src="/assets/images/me.png"
+                         alt="Honey Grace Denolan"
+                         class="profile-image mx-auto">
+                </div>
+
+                <!-- Name with gradient -->
+                <h1 class="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 hero-element gradient-text fade-in-view px-2">
+                    Honey Grace Denolan
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-base sm:text-xl md:text-2xl text-slate-400 mb-8 sm:mb-12 hero-element font-medium fade-in-view px-2">
+                    <span class="inline-block">Software Developer</span> <span class="text-primary hidden sm:inline">•</span><br class="sm:hidden">
+                    <span class="inline-block">IT Specialist</span> <span class="text-primary hidden sm:inline">•</span><br class="sm:hidden">
+                    <span class="inline-block">Multilingual Professional</span>
+                </p>
+
+                <!-- Social Media Links -->
+                <div class="flex justify-center space-x-4 mb-10 hero-element fade-in-view">
+                    <a href="mailto:honeygden@gmail.com"
+                       class="social-btn group"
+                       aria-label="Email">
+                        <i class="bi bi-envelope-fill text-2xl group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/honey-grace-denolan-56576517b/" target="_blank"
+                       class="social-btn group"
+                       aria-label="LinkedIn">
+                        <i class="bi bi-linkedin text-2xl group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://github.com/Honeegee" target="_blank"
+                       class="social-btn group"
+                       aria-label="GitHub">
+                        <i class="bi bi-github text-2xl group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://www.facebook.com/honeygrace.denolan" target="_blank"
+                       class="social-btn group"
+                       aria-label="Facebook">
+                        <i class="bi bi-facebook text-2xl group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC_tBCjsbMh2oSjHukqombcQ" target="_blank"
+                       class="social-btn group"
+                       aria-label="YouTube">
+                        <i class="bi bi-youtube text-2xl group-hover:scale-110 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Scroll indicator -->
+                <div class="hero-element mt-16 animate-bounce fade-in-view">
+                    <a href="#about" class="inline-block text-primary-light hover:text-primary transition-colors">
+                        <i class="bi bi-chevron-down text-3xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quick Stats & Skills Section -->
+    <section class="py-16 relative z-10 bg-dark border-t border-slate-700/30">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <div class="card text-center fade-in-view">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">10+</div>
+                        <div class="text-slate-400 text-sm">Projects Built</div>
+                    </div>
+                    <div class="card text-center fade-in-view">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">4+</div>
+                        <div class="text-slate-400 text-sm">Years Abroad</div>
+                    </div>
+                    <div class="card text-center fade-in-view">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">3</div>
+                        <div class="text-slate-400 text-sm">Languages Spoken</div>
+                    </div>
+                    <div class="card text-center fade-in-view">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">BSIT</div>
+                        <div class="text-slate-400 text-sm">Software Dev</div>
+                    </div>
+                </div>
+
+                <!-- Skills Tags -->
+                <div class="text-center fade-in-view">
+                    <h3 class="text-xl font-semibold text-white mb-6">Skills & Expertise</h3>
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20 hover:border-primary/40 hover:bg-primary/20 transition-all cursor-default">
+                            <i class="bi bi-phone mr-2"></i>Mobile Development
+                        </span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20 hover:border-primary/40 hover:bg-primary/20 transition-all cursor-default">
+                            <i class="bi bi-code-slash mr-2"></i>Web Development
+                        </span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20 hover:border-primary/40 hover:bg-primary/20 transition-all cursor-default">
+                            <i class="bi bi-palette mr-2"></i>UI/UX Design
+                        </span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20 hover:border-primary/40 hover:bg-primary/20 transition-all cursor-default">
+                            <i class="bi bi-diagram-3 mr-2"></i>n8n Automation
+                        </span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20 hover:border-primary/40 hover:bg-primary/20 transition-all cursor-default">
+                            <i class="bi bi-robot mr-2"></i>Vibe Coding (AI Tools)
+                        </span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20 hover:border-primary/40 hover:bg-primary/20 transition-all cursor-default">
+                            <i class="bi bi-translate mr-2"></i>Chinese Language
+                        </span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20 hover:border-primary/40 hover:bg-primary/20 transition-all cursor-default">
+                            <i class="bi bi-brush mr-2"></i>Creative Design
+                        </span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20 hover:border-primary/40 hover:bg-primary/20 transition-all cursor-default">
+                            <i class="bi bi-lightbulb mr-2"></i>Problem Solving
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative z-10 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="section-title mb-4">About Me</h2>
+                    <p class="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
+                        Aspiring IT professional with a unique background in chemical analysis and international experience
+                    </p>
+                </div>
+
+                <div class="card p-6 sm:p-10 md:p-14 fade-in-view">
+                    <div class="space-y-8 sm:space-y-12">
+                        <!-- Professional Journey -->
+                        <div class="content-section space-y-4 sm:space-y-5">
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white flex items-center gap-3 sm:gap-4">
+                                <span class="accent-line"></span>
+                                Professional Journey
+                            </h3>
+                            <p class="text-slate-300 leading-relaxed text-base sm:text-lg pl-4 sm:pl-8 text-justify">
+                                Honey Grace Denolan is an aspiring IT professional with a background in chemical analysis and four years of experience as an Overseas Filipino Worker (OFW). Her journey abroad helped her become resilient and independent, while also giving her the chance to learn the Chinese language—an added skill that continues to benefit her in both personal and professional settings.
+                            </p>
+                        </div>
+
+                        <!-- Technical Focus -->
+                        <div class="content-section space-y-4 sm:space-y-5">
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white flex items-center gap-3 sm:gap-4">
+                                <span class="accent-line"></span>
+                                Technical Focus
+                            </h3>
+                            <p class="text-slate-300 leading-relaxed text-base sm:text-lg pl-4 sm:pl-8 text-justify">
+                                Currently pursuing her studies in Information Technology, Honey focuses on mobile and web development. She enjoys building user-friendly and visually engaging applications using tools like Android Studio, Java, and JavaScript. As an introvert and a fast learner, she works well in focused environments and is always eager to explore new technologies and improve her skills.
+                            </p>
+                        </div>
+
+                        <!-- Creative Pursuits -->
+                        <div class="content-section space-y-4 sm:space-y-5">
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white flex items-center gap-3 sm:gap-4">
+                                <span class="accent-line"></span>
+                                Creative Pursuits
+                            </h3>
+                            <p class="text-slate-300 leading-relaxed text-base sm:text-lg pl-4 sm:pl-8 text-justify">
+                                Beyond coding, Honey finds inspiration through travel. She has a deep love for the beach and often finds peace in watching sunsets. These experiences influence her creative side and help shape the themes of her projects, many of which reflect her passion for nature, exploration, and meaningful digital design. In her free time, she also enjoys, scuba diving, freediving, painting landscapes, and playing the guitar.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-20 relative z-10 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="card p-10 fade-in-view">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Explore?</h2>
+                    <p class="text-slate-400 mb-8 text-lg">
+                        Discover my projects, professional experience, and educational journey.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="projects.html" class="btn-primary inline-flex items-center justify-center">
+                            <i class="bi bi-folder mr-2"></i>View Projects
+                        </a>
+                        <a href="contact.html" class="btn-secondary inline-flex items-center justify-center">
+                            <i class="bi bi-envelope mr-2"></i>Get in Touch
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Interface -->
+    <div id="chat-component"></div>
+
+    <!-- Load components and initialize -->
+    <script type="module">
+        import { initHeroAnimations } from '/components/hero.js';
+        import { initNavAnimation } from '/components/navigation/navAnimation.js';
+
+        async function loadComponent(elementId, filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+                if (elementId === 'navigation-component') {
+                    initNavAnimation();
+                }
+            } catch (error) {
+                console.error(`Error loading component ${filePath}:`, error);
+            }
+        }
+
+        async function initializeChatSystem() {
+            try {
+                const { ChatAPI } = await import('/components/chat/chatAPI.js');
+                window.chatAPI = new ChatAPI();
+
+                const { initializeChat } = await import('/components/chat/chatUI.js');
+                initializeChat();
+            } catch (error) {
+                console.error('Failed to initialize chat system:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            initHeroAnimations();
+
+            await Promise.all([
+                loadComponent('navigation-component', '/components/navigation/navigation.html'),
+                loadComponent('chat-component', '/components/chat/chat.html')
+            ]);
+
+            initializeChatSystem();
+
+            // Scroll animations
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-view').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+        });
+    </script>
+
+    <script type="module" src="/utils/script.js"></script>
+</body>
+</html>

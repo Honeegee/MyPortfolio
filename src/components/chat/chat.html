@@ -1,0 +1,85 @@
+<!-- AI Chat Interface -->
+<div id="aiChat" class="fixed bottom-4 sm:bottom-6 right-2 sm:right-6 z-50">
+    <!-- Chat Button -->
+    <button id="chatToggle" class="p-1 sm:p-2 group scale-[0.65] sm:scale-100 origin-bottom-right" aria-label="Toggle chat window">
+        <div class="relative before:content-[''] before:absolute before:inset-[-4px] before:bg-gradient-to-br before:from-primary before:via-primary-dark before:to-primary-light before:rounded-full before:opacity-50 before:animate-pulse before:blur-sm">
+            <div class="absolute -top-10 right-0 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 bg-dark-card/90 backdrop-blur-lg px-3 py-2 rounded-xl border border-primary/20 text-primary-light text-sm whitespace-nowrap after:content-[''] after:absolute after:bottom-[-8px] after:right-6 after:border-8 after:border-transparent after:border-t-primary/20 hidden sm:block">
+                Hi! Click to chat with me!
+            </div>
+            <div class="relative w-22 h-32 group">
+                <video src="/assets/videos/wave.mp4" autoplay loop muted playsinline preload="none" class="w-full h-full object-cover rounded-full bg-primary/10 backdrop-blur-lg border border-primary/20 transition-all duration-500 transform group-hover:scale-110 group-hover:border-primary/60 filter group-hover:brightness-110">
+                </video>
+                <div class="absolute inset-0 rounded-full pointer-events-none bg-gradient-to-br from-transparent via-transparent to-primary/10"></div>
+            </div>
+            <div class="absolute -right-1 -bottom-1 animate-[wave_2.5s_ease-in-out_infinite] origin-[70%_70%]">
+                <i class="bi bi-hand-index-thumb text-primary text-lg"></i>
+            </div>
+        </div>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="chatWindow"
+         class="opacity-0 scale-90 translate-y-5 pointer-events-none fixed bottom-28 sm:bottom-40 right-2 sm:right-6 left-2 sm:left-auto w-auto sm:w-96 max-h-[70vh] sm:max-h-[70vh]
+                rounded-lg shadow-2xl backdrop-blur-2xl border border-slate-700/50 bg-dark-card/95
+                hover:border-primary/40 transition-all duration-300 flex flex-col"
+         aria-labelledby="chatTitle" role="dialog">
+        <div class="p-3 sm:p-4 border-b border-slate-700/50 flex justify-between items-center">
+            <div class="flex items-center space-x-2 min-w-0 flex-1">
+                <div class="relative flex-shrink-0">
+                    <img src="/assets/images/Honeygee3d.png" alt="Honey" class="w-6 h-6 rounded-full object-cover">
+                    <span id="chatStatusDot" class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-dark-card bg-slate-500" title="Checking connection..."></span>
+                </div>
+                <div class="flex flex-col min-w-0">
+                    <h3 id="chatTitle" class="text-white font-semibold text-sm sm:text-base leading-tight truncate">HoneyAI</h3>
+                    <span id="chatStatusText" class="text-[10px] text-slate-500 leading-tight">Checking...</span>
+                </div>
+            </div>
+            <button id="chatClose" class="text-slate-400 hover:text-primary transition-colors transform hover:rotate-90 duration-300 flex-shrink-0 p-1 min-w-[32px] min-h-[32px] flex items-center justify-center" aria-label="Close chat">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <!-- Offline Banner -->
+        <div id="chatOfflineBanner" class="hidden px-3 py-2 bg-amber-500/20 border-b border-amber-500/30 text-amber-300 text-xs flex items-center gap-2">
+            <i class="bi bi-exclamation-triangle"></i>
+            <span id="offlineBannerText">AI service is currently offline. Please try again later.</span>
+        </div>
+        <div id="chatMessages"
+             class="p-3 sm:p-4 space-y-3 sm:space-y-4 overflow-y-auto flex-1 max-h-[40vh] sm:max-h-[350px]
+                    scrollbar-thin scrollbar-thumb-primary/50 scrollbar-track-transparent"
+             role="log" aria-live="polite">
+            <!-- Initial message will be added by JavaScript -->
+        </div>
+        <div class="p-3 sm:p-4 border-t border-slate-700/50 flex-shrink-0">
+            <form id="chatForm" class="flex space-x-2">
+                <input type="text"
+                       id="userMessage"
+                       class="flex-1 min-w-0 rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base text-slate-200 bg-dark/70 border border-slate-700/50 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all duration-300"
+                       placeholder="Ask a question..."
+                       aria-label="Type your message">
+                <button type="submit"
+                        class="px-3 sm:px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary text-primary hover:text-white border border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex-shrink-0 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                        aria-label="Send message">
+                    <i class="bi bi-send transition-transform group-hover:rotate-12"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Chat animation keyframes -->
+<style>
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    75% { transform: rotate(-10deg); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite;
+}
+</style>

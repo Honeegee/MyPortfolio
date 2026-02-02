@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education - Honey Grace Denolan</title>
+    <link rel="icon" type="image/png" href="/assets/images/Honeygee3d.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body class="bg-dark text-slate-300 font-sans">
+    <!-- Navigation -->
+    <div id="navigation-component"></div>
+
+    <!-- Education Section -->
+    <section class="pt-32 pb-24 min-h-screen relative z-10 bg-dark">
+        <div class="container mx-auto px-6">
+            <h1 class="section-title mb-16">Educational Journey</h1>
+
+            <div class="relative max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Current Education -->
+                    <div class="card fade-in-view">
+                        <div class="mb-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="/assets/images/mmdc.png" alt="MMDC Logo" class="w-16 h-16 object-contain rounded-lg flex-shrink-0">
+                                <div>
+                                    <span class="text-primary text-sm font-medium">2022 - 2026</span>
+                                    <h3 class="text-2xl font-semibold text-white mt-2">Bachelor of Science in Information Technology</h3>
+                                    <p class="text-slate-400 mt-2">Mapua Malayan Digital College</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-4 font-medium">Highlights</h4>
+                            <ul class="list-disc list-inside text-slate-300 space-y-2">
+                                <li>Focus on Software Development</li>
+                                <li>Mobile Application Development</li>
+                                <li>Web Technologies & Frameworks</li>
+                                <li>Database Management Systems</li>
+                                <li>API Development & Integration</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Previous Education -->
+                    <div class="card fade-in-view">
+                        <div class="mb-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="/assets/images/tupvlogo.png" alt="TUPV Logo" class="w-16 h-16 object-contain rounded-lg flex-shrink-0">
+                                <div>
+                                    <span class="text-primary text-sm font-medium">2007 - 2011</span>
+                                    <h3 class="text-2xl font-semibold text-white mt-2">Chemical Engineering Technology</h3>
+                                    <p class="text-slate-400 mt-2">Technological University of the Philippines-Visayas</p>
+                                    <p class="text-slate-400 mt-1">Talisay City, Negros Occidental</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-4 font-medium">Key Learnings</h4>
+                            <ul class="list-disc list-inside text-slate-300 space-y-2">
+                                <li>Analytical Problem Solving</li>
+                                <li>Process Optimization</li>
+                                <li>Technical Documentation</li>
+                                <li>Laboratory Procedures</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Self-Learning & Automation -->
+                    <div class="col-span-1 md:col-span-2 card fade-in-view">
+                        <div class="mb-6">
+                            <span class="text-primary text-sm font-medium">Ongoing</span>
+                            <h3 class="text-2xl font-semibold text-white mt-2">Self-Learning & Continuous Development</h3>
+                            <p class="text-slate-400 mt-2">Independent study and hands-on practice with modern tools</p>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-4 font-medium">Technologies & Tools</h4>
+                            <ul class="list-disc list-inside text-slate-300 space-y-2">
+                                <li><strong>n8n</strong> – Workflow automation, node-based integrations</li>
+                                <li><strong>Automation</strong> – Scripting, CI/CD, process optimization</li>
+                                <li><strong>AI Assistants</strong> – ClaudeCode, ChatGPT, Kilo Code for development assistance</li>
+                                <li><strong>Modern Frameworks</strong> – React, Next.js, Nuxt.js, Node.js, Tailwind CSS, shadcn/ui</li>
+                                <li><strong>Cloud & DevOps</strong> – Docker, AWS, GitHub Actions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Skills Transfer Section -->
+                    <div class="col-span-1 md:col-span-2 mt-8 text-center fade-in-view">
+                        <h2 class="text-2xl font-semibold text-white mb-6">Skills Transfer</h2>
+                        <p class="text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                            My background in Chemical Engineering Technology has provided a strong foundation in analytical thinking
+                            and problem-solving, which translates perfectly into software development. The systematic approach to
+                            process optimization and attention to detail are valuable assets in creating efficient, scalable software solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-16">
+                    <a href="experience.html" class="btn-secondary w-full sm:w-auto text-center">
+                        <i class="bi bi-arrow-left mr-2"></i>Back to Experience
+                    </a>
+                    <a href="contact.html" class="btn-secondary w-full sm:w-auto text-center">
+                        Contact Me<i class="bi bi-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Interface -->
+    <div id="chat-component"></div>
+
+    <!-- Load components -->
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loadComponent = async (id, path) => {
+                try {
+                    const response = await fetch(path);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    document.getElementById(id).innerHTML = await response.text();
+                } catch (error) {
+                    console.error(`Error loading ${path}:`, error);
+                }
+            };
+
+            await Promise.all([
+                loadComponent('navigation-component', '/components/navigation/navigation.html'),
+                loadComponent('chat-component', '/components/chat/chat.html')
+            ]);
+
+            const [{ initNavAnimation }, { initializeChat }, { ChatAPI }] = await Promise.all([
+                import('/components/navigation/navAnimation.js'),
+                import('/components/chat/chatUI.js'),
+                import('/components/chat/chatAPI.js')
+            ]);
+
+            initNavAnimation();
+            window.chatAPI = new ChatAPI();
+            initializeChat();
+
+            // Scroll animations
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-view').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Honey Grace Denolan</title>
+    <link rel="icon" type="image/png" href="/assets/images/Honeygee3d.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body class="bg-dark text-slate-300 font-sans">
+    <!-- Navigation -->
+    <div id="navigation-component"></div>
+
+    <!-- Contact Section -->
+    <section class="pt-32 pb-24 min-h-screen relative z-10 bg-dark">
+        <div class="container mx-auto px-6">
+            <h1 class="section-title mb-6">Get in Touch</h1>
+            <p class="text-center text-slate-400 mb-16 max-w-2xl mx-auto">
+                Feel free to send me a message and I'll get back to you as soon as possible.
+            </p>
+
+            <div class="max-w-2xl mx-auto">
+                <!-- Contact Form -->
+                <div class="card fade-in-view">
+                    <h2 class="text-2xl font-semibold text-white mb-6">Message Form</h2>
+                    <form id="contactForm" class="space-y-6">
+
+                        <div>
+                            <label for="name" class="block text-slate-300 mb-2 font-medium">Name</label>
+                            <input type="text" id="name" name="name" required class="form-input" placeholder="Your name">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-slate-300 mb-2 font-medium">Email</label>
+                            <input type="email" id="email" name="email" required class="form-input" placeholder="Your email">
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-slate-300 mb-2 font-medium">Subject</label>
+                            <input type="text" id="subject" name="subject" required class="form-input" placeholder="Subject">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-slate-300 mb-2 font-medium">Message</label>
+                            <textarea id="message" name="message" rows="5" required
+                                      class="form-input resize-none" placeholder="Your message"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full flex items-center justify-center space-x-2">
+                            <span>Send Message</span>
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-16 max-w-2xl mx-auto">
+                <a href="education.html" class="btn-secondary w-full sm:w-auto text-center">
+                    <i class="bi bi-arrow-left mr-2"></i>Back to Education
+                </a>
+                <a href="index.html" class="btn-secondary w-full sm:w-auto text-center">
+                    Back to Home<i class="bi bi-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Interface -->
+    <div id="chat-component"></div>
+
+    <!-- Load components -->
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loadComponent = async (id, path) => {
+                try {
+                    const response = await fetch(path);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    document.getElementById(id).innerHTML = await response.text();
+                } catch (error) {
+                    console.error(`Error loading ${path}:`, error);
+                }
+            };
+
+            await Promise.all([
+                loadComponent('navigation-component', '/components/navigation/navigation.html'),
+                loadComponent('chat-component', '/components/chat/chat.html')
+            ]);
+
+            const [{ initNavAnimation }, { initializeChat }, { ChatAPI }] = await Promise.all([
+                import('/components/navigation/navAnimation.js'),
+                import('/components/chat/chatUI.js'),
+                import('/components/chat/chatAPI.js')
+            ]);
+
+            initNavAnimation();
+            window.chatAPI = new ChatAPI();
+            initializeChat();
+
+            // Scroll animations
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-view').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+
+            // Toast notification function
+            function showToast(message, isSuccess = true) {
+                // Remove any existing toast
+                const existingToast = document.getElementById('toast-notification');
+                if (existingToast) existingToast.remove();
+
+                const toast = document.createElement('div');
+                toast.id = 'toast-notification';
+                toast.className = `fixed top-20 left-1/2 -translate-x-1/2 z-[9999] px-6 py-4 rounded-xl shadow-2xl
+                    flex items-center gap-3 min-w-[300px] max-w-[90vw] transform transition-all duration-500
+                    ${isSuccess
+                        ? 'bg-green-500/20 border-2 border-green-500/50 text-green-300'
+                        : 'bg-red-500/20 border-2 border-red-500/50 text-red-300'}
+                    backdrop-blur-xl animate-[slideDown_0.5s_ease-out]`;
+
+                toast.innerHTML = `
+                    <i class="bi ${isSuccess ? 'bi-check-circle-fill text-green-400' : 'bi-exclamation-circle-fill text-red-400'} text-2xl"></i>
+                    <div class="flex-1">
+                        <p class="font-semibold text-base">${isSuccess ? 'Success!' : 'Error'}</p>
+                        <p class="text-sm opacity-90">${message}</p>
+                    </div>
+                    <button onclick="this.parentElement.remove()" class="text-current opacity-60 hover:opacity-100 p-1">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                `;
+
+                document.body.appendChild(toast);
+
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.style.opacity = '0';
+                        toast.style.transform = 'translate(-50%, -20px)';
+                        setTimeout(() => toast.remove(), 300);
+                    }
+                }, 5000);
+            }
+
+            // Contact form submission handling
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const submitButton = contactForm.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
+
+                    // Show loading state
+                    submitButton.innerHTML = '<span>Sending...</span><i class="bi bi-hourglass-split ml-2"></i>';
+                    submitButton.disabled = true;
+
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value
+                    };
+
+                    try {
+                        const response = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(formData)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            showToast(result.message || 'Message sent successfully!', true);
+                            contactForm.reset();
+                        } else {
+                            showToast(result.message || 'Failed to send message. Please try again.', false);
+                        }
+                    } catch (error) {
+                        console.error('Form submission error:', error);
+                        showToast('Network error. Please check your connection and try again.', false);
+                    } finally {
+                        // Restore button state
+                        submitButton.innerHTML = originalButtonText;
+                        submitButton.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

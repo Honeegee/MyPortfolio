@@ -1,13 +1,14 @@
-<nav class="fixed w-full bg-dark-card/90 backdrop-blur-lg border-b border-slate-700/50 z-50">
-    <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+<nav class="fixed w-full bg-dark-card border-b border-slate-700/50 z-50 overflow-hidden">
+    <!-- Full-width video overlay (desktop only) -->
+    <div class="absolute inset-0 w-full h-full hidden md:flex items-center pointer-events-none z-[5] bg-dark-card">
+        <video autoplay loop muted playsinline preload="none" class="h-[70%] nav-logo-video object-contain absolute left-0">
+            <source src="/assets/videos/walking.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 relative z-10">
         <div class="flex justify-between items-center">
-            <div class="flex items-center relative overflow-hidden flex-1 min-w-0">
+            <div class="flex items-center relative overflow-hidden flex-1 min-w-0 h-12 sm:h-16">
                 <a href="/pages/index.html" class="text-xl sm:text-2xl font-bold text-primary hover:text-primary-light transition-colors relative z-[1000] flex-shrink-0">&lt;HGD/&gt;</a>
-                <div class="h-12 sm:h-16 overflow-hidden relative flex-1 max-w-[200px] sm:max-w-none ml-2 hidden sm:block">
-                    <video autoplay loop muted playsinline preload="none" class="h-12 sm:h-16 nav-logo-video object-contain absolute left-0">
-                        <source src="/assets/videos/walking.mp4" type="video/mp4">
-                    </video>
-                </div>
             </div>
             <div class="hidden md:flex items-center space-x-4 lg:space-x-8 nav-menu flex-shrink-0">
                 <a href="/pages/index.html" class="nav-link relative py-2 text-slate-300 hover:text-primary transition-all duration-300 text-sm lg:text-base" data-menu-index="1">Home</a>

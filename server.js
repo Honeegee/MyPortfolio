@@ -96,31 +96,8 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // Contact form email endpoint
+const { Resend } = require('resend');
 const nodemailer = require('nodemailer');
-
-// Create transporter - use Resend for Render (SMTP blocked on free tier)
-const createTransporter = () => {
-    // Check if using Resend API (recommended for Render)
-    if (process.env.RESEND_API_KEY) {
-        return nodemailer.createTransport({
-            host: 'smtp.resend.com',
-            port: 465,
-            secure: true,
-            auth: {
-                user: 'resend',
-                pass: process.env.RESEND_API_KEY
-            }
-        });
-    }
-    // Fallback to Gmail (works on paid Render plans or local dev)
-    return nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASSWORD
-        }
-    });
-};
 
 app.post('/api/contact', async (req, res) => {
     try {
@@ -155,41 +132,70 @@ app.post('/api/contact', async (req, res) => {
             });
         }
 
-        const transporter = createTransporter();
-        
-        // Email content
-        // For Resend: use verified domain email or RESEND_FROM_EMAIL env var
-        const fromEmail = process.env.RESEND_API_KEY
-            ? (process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev')
-            : process.env.EMAIL_USER;
-
-        const mailOptions = {
-            from: fromEmail,
-            to: process.env.RECEIVER_EMAIL || process.env.EMAIL_USER,
-            replyTo: email,
-            subject: `Portfolio Contact: ${subject}`,
-            html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                    <h2 style="color: #333;">New Contact Form Submission</h2>
-                    <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
-                        <p><strong>From:</strong> ${name} (${email})</p>
-                        <p><strong>Subject:</strong> ${subject}</p>
-                        <p><strong>Message:</strong></p>
-                        <div style="background-color: white; padding: 15px; border-left: 4px solid #007bff; margin-top: 10px;">
-                            ${message.replace(/\n/g, '<br>')}
-                        </div>
+        const toEmail = process.env.RECEIVER_EMAIL || process.env.EMAIL_USER;
+        const emailSubject = `Portfolio Contact: ${subject}`;
+        const htmlContent = `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #333;">New Contact Form Submission</h2>
+                <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                    <p><strong>From:</strong> ${name} (${email})</p>
+                    <p><strong>Subject:</strong> ${subject}</p>
+                    <p><strong>Message:</strong></p>
+                    <div style="background-color: white; padding: 15px; border-left: 4px solid #007bff; margin-top: 10px;">
+                        ${message.replace(/\n/g, '<br>')}
                     </div>
-                    <p style="color: #666; font-size: 12px;">
-                        This email was sent from your portfolio website contact form.
-                    </p>
                 </div>
-            `,
-            text: `New contact form submission:\n\nFrom: ${name} (${email})\nSubject: ${subject}\n\nMessage:\n${message}`
-        };
+                <p style="color: #666; font-size: 12px;">
+                    This email was sent from your portfolio website contact form.
+                </p>
+            </div>
+        `;
+        const textContent = `New contact form submission:\n\nFrom: ${name} (${email})\nSubject: ${subject}\n\nMessage:\n${message}`;
 
-        // Send email
-        const info = await transporter.sendMail(mailOptions);
-        console.log('Email sent:', info.messageId);
+        if (hasResend) {
+            // Use Resend HTTP API (works on Render - no SMTP needed)
+            const resend = new Resend(process.env.RESEND_API_KEY);
+            const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+
+            const { data, error } = await resend.emails.send({
+                from: fromEmail,
+                to: [toEmail],
+                replyTo: email,
+                subject: emailSubject,
+                html: htmlContent,
+                text: textContent
+            });
+
+            if (error) {
+                console.error('Resend API error:', error);
+                return res.status(500).json({
+                    error: 'Email sending failed',
+                    message: 'Failed to send message. Please try again later.'
+                });
+            }
+
+            console.log('Email sent via Resend:', data.id);
+        } else {
+            // Fallback to Gmail SMTP (works locally or on paid Render plans)
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.EMAIL_PASSWORD
+                }
+            });
+
+            const info = await transporter.sendMail({
+                from: process.env.EMAIL_USER,
+                to: toEmail,
+                replyTo: email,
+                subject: emailSubject,
+                html: htmlContent,
+                text: textContent
+            });
+
+            console.log('Email sent via Gmail:', info.messageId);
+        }
 
         res.json({
             success: true,
@@ -198,14 +204,11 @@ app.post('/api/contact', async (req, res) => {
 
     } catch (error) {
         console.error('Email sending error:', error);
-        
-        // Provide user-friendly error messages
+
         let errorMessage = 'Failed to send message. Please try again later.';
         if (error.code === 'EAUTH') {
             errorMessage = 'Email authentication failed. Please check email configuration.';
         } else if (error.code === 'ETIMEDOUT' || error.code === 'ECONNECTION') {
-            // SMTP blocked on Render free tier - suggest using Resend
-            console.error('SMTP connection blocked - consider using RESEND_API_KEY');
             errorMessage = 'Unable to connect to email service. Please try again later.';
         }
 
